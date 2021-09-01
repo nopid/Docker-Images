@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 ARG DEBIAN_FRONTEND="noninteractive"
 RUN apt update
 RUN apt upgrade -y
-RUN apt install -y locales xinetd exim4 mailutils-imap4d python3-scapy alpine lynx lsof dnsmasq man tmux
+RUN apt install -y locales xinetd exim4 mailutils-imap4d python3-scapy alpine lynx lsof dnsmasq man tmux nmap
 
 RUN useradd -ms /bin/bash -p $(openssl passwd -6 guest) guest
 
