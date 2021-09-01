@@ -1,0 +1,15 @@
+FROM nopid/quagga:debian10
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+ARG DEBIAN_FRONTEND="noninteractive"
+RUN apt update
+RUN apt upgrade -y
+RUN apt install -y locales xinetd exim4 mailutils-imap4d python3-scapy alpine lynx lsof dnsmasq man tmux
+
+RUN useradd -ms /bin/bash -p $(openssl passwd -6 guest) guest
+
+RUN apt clean && \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
