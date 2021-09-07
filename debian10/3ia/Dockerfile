@@ -22,7 +22,7 @@ RUN apt install -y \
 	nmap \
 	tcpd \
 	isc-dhcp-server \
-    proftpd \
+    proftpd ftp \
     tftp tftpd
 
 RUN useradd -ms /bin/bash -p $(openssl passwd -6 guest) guest
