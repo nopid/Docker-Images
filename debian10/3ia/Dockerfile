@@ -21,7 +21,8 @@ RUN apt install -y \
 	tmux \
 	nmap \
 	tcpd \
-	isc-dhcp-server
+	isc-dhcp-server \
+    proftpd
 
 RUN useradd -ms /bin/bash -p $(openssl passwd -6 guest) guest
 
