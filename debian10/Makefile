@@ -19,5 +19,5 @@ sdn: base
 p4: base
 	$(BUILDX) -t nopid/p4:debian10 --push p4
 
-3ia: base
+3ia: quagga
 	$(BUILDX) -t nopid/3ia --push 3ia

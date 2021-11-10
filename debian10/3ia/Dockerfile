@@ -24,7 +24,8 @@ RUN apt install -y \
 	isc-dhcp-server \
     proftpd ftp \
     tftp tftpd \
-    python3-pyroute2
+    python3-pyroute2 \
+    radvd
 
 RUN useradd -ms /bin/bash -p $(openssl passwd -6 guest) guest
 
