@@ -1,23 +1,24 @@
 BUILDX=docker buildx build --platform linux/amd64,linux/arm64
 
-.PHONY: base quagga frr sdn 3ia all pushall
+.PHONY: 3ia all pushall all-multi create-builder 3ia-multi delete-builder
 
-all: base quagga 3ia
+all: 3ia
+all-multi: create-builder 3ia-multi delete-builder
 
-base:
-	$(BUILDX) -t nopid/base:debian10 --push base
+pushall:
+	docker push nopid/3ia:debian10
+	docker image tag nopid/3ia:debian10 nopid/3ia:latest
+	docker push nopid/3ia:latest
 
-quagga: base
-	$(BUILDX) -t nopid/quagga:debian10 --push quagga
+3ia:
+	docker build -t nopid/3ia:debian10 3ia
 
-frr: base
-	$(BUILDX) -t nopid/frr:debian10 --push frr
+3ia-multi: create-builder
+	$(BUILDX) -t nopid/3ia:debian10 -t nopid/3ia:latest --push 3ia
 
-sdn: base
-	$(BUILDX) -t nopid/sdn:debian10 --push sdn
+create-builder:
+	docker buildx create --name kat-builder --use
+	docker buildx inspect --bootstrap
 
-p4: base
-	$(BUILDX) -t nopid/p4:debian10 --push p4
-
-3ia: quagga
-	$(BUILDX) -t nopid/3ia --push 3ia
+delete-builder:
+	docker buildx rm kat-builder
